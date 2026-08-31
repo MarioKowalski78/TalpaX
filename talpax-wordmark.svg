@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 740 250" role="img" aria-labelledby="title desc">
+  <title id="title">TalpaX wordmark</title>
+  <desc id="desc">TalpaX wordmark with the complete word in front of a dimensional purple X tile.</desc>
+  <defs>
+    <linearGradient id="tile" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#65486f"/>
+      <stop offset="0.55" stop-color="#4b3153"/>
+      <stop offset="1" stop-color="#35203d"/>
+    </linearGradient>
+    <linearGradient id="edge" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.28"/>
+      <stop offset="0.45" stop-color="#ffffff" stop-opacity="0.04"/>
+      <stop offset="1" stop-color="#000000" stop-opacity="0.20"/>
+    </linearGradient>
+    <linearGradient id="mound-edge" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#b7adb9"/>
+      <stop offset="0.48" stop-color="#765983"/>
+      <stop offset="1" stop-color="#35203d"/>
+    </linearGradient>
+    <linearGradient id="word-edge" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#765983"/>
+      <stop offset="0.52" stop-color="#4b3153"/>
+      <stop offset="1" stop-color="#2f1b36"/>
+    </linearGradient>
+    <filter id="tile-shadow" x="-25%" y="-25%" width="150%" height="165%">
+      <feDropShadow dx="0" dy="7" stdDeviation="7" flood-color="#1b101f" flood-opacity="0.30"/>
+    </filter>
+    <filter id="mound-shadow" x="-15%" y="-40%" width="130%" height="190%">
+      <feDropShadow dx="0" dy="3" stdDeviation="2" flood-color="#180d1d" flood-opacity="0.42"/>
+    </filter>
+  </defs>
+
+  <!-- The tile is painted first. Every letter, including the final a, is painted afterwards and therefore remains in front. -->
+  <g filter="url(#tile-shadow)">
+    <rect x="489" y="15" width="218" height="218" rx="39" fill="url(#tile)"/>
+    <rect x="492" y="18" width="212" height="212" rx="36" fill="none" stroke="url(#edge)" stroke-width="6"/>
+  </g>
+
+  <g fill="#ffffff" stroke="url(#word-edge)" stroke-width="78" stroke-linejoin="round" paint-order="stroke fill">
+    <path d="M52 1038V1327H1204V1038ZM398 0V969H858V0Z" transform="translate(30 175) scale(.09 -.09)"/>
+    <path d="M804 0V797H175V929L308 1062H971L1236 797V0ZM264 0 86 175V441L264 618H734V434H506V248H734V131L602 0Z" transform="translate(137 175) scale(.09 -.09)"/>
+    <path d="M352 0 104 248V1467H546V265H744V0Z" transform="translate(251 175) scale(.09 -.09)"/>
+    <path d="M616 0V248H811V797H616V931L746 1062H988L1254 797V265L988 0ZM104 -354V1062H546V-354Z" transform="translate(313 175) scale(.09 -.09)"/>
+    <path d="M804 0V797H175V929L308 1062H971L1236 797V0ZM264 0 86 175V441L264 618H734V434H506V248H734V131L602 0Z" transform="translate(428 175) scale(.09 -.09)"/>
+  </g>
+
+  <path d="M886 0 1 1327H478L1368 0ZM956 727 720 1072 875 1327H1349ZM-26 0 397 618 634 258 479 0Z" fill="#ffffff" stroke="url(#edge)" stroke-width="67" stroke-linejoin="round" paint-order="stroke fill" transform="translate(538 175) scale(.09 -.09)"/>
+  <g filter="url(#mound-shadow)">
+    <path d="M537.34 208.52 Q598.5 184 659.66 208.52 A7 7 0 0 1 654.34 221.48 Q598.5 198 542.66 221.48 A7 7 0 0 1 537.34 208.52Z" fill="url(#mound-edge)"/>
+    <path d="M538.48 211.30 Q598.5 187 658.52 211.30 A4 4 0 0 1 655.48 218.70 Q598.5 195 541.52 218.70 A4 4 0 0 1 538.48 211.30Z" fill="#78c8c3"/>
+  </g>
+</svg>

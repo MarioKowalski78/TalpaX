@@ -1925,7 +1925,7 @@
 
     function el(id) { return document.getElementById(id); }
 
-    var BRAND_IMG = '<img src="../branding/talpax-wordmark.svg" alt="TalpaX" class="brand-inline" loading="lazy">';
+    var BRAND_IMG = '<img src="talpax-wordmark.svg" alt="TalpaX" class="brand-inline" loading="lazy">';
 
     function toBrand(text) {
         if (typeof text !== "string") return text;
