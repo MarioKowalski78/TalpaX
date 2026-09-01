@@ -1918,105 +1918,105 @@
 
     var GITHUB_TEXT = {
         de: {
-            eyebrow: "Open Source",
+            eyebrow: "GitHub",
             title: "TalpaX auf GitHub",
-            body: "Quellcode, aktuelle Entwicklung und Releases sind öffentlich im offiziellen Projekt-Repository verfügbar.",
+            body: "Dies ist das offizielle GitHub-Repository von TalpaX. Quellcode und Releases sind derzeit nicht öffentlich verfügbar.",
             button: "Projekt auf GitHub öffnen"
         },
         en: {
-            eyebrow: "Open source",
+            eyebrow: "GitHub",
             title: "TalpaX on GitHub",
-            body: "Source code, current development and releases are publicly available in the official project repository.",
+            body: "This is the official GitHub repository for TalpaX. Source code and releases are not currently publicly available.",
             button: "Open project on GitHub"
         },
         "zh-CN": {
-            eyebrow: "开源",
+            eyebrow: "GitHub",
             title: "GitHub 上的 TalpaX",
-            body: "源代码、最新开发进展和版本发布均可在官方项目仓库中公开查看。",
+            body: "这是 TalpaX 的官方 GitHub 仓库。源代码和版本目前尚未公开。",
             button: "在 GitHub 上打开项目"
         },
         "zh-TW": {
-            eyebrow: "開放原始碼",
+            eyebrow: "GitHub",
             title: "GitHub 上的 TalpaX",
-            body: "原始碼、最新開發進度與版本發布均可在官方專案儲存庫中公開查看。",
+            body: "這是 TalpaX 的官方 GitHub 儲存庫。原始碼和版本目前尚未公開。",
             button: "在 GitHub 上開啟專案"
         },
         ru: {
-            eyebrow: "Открытый код",
+            eyebrow: "GitHub",
             title: "TalpaX на GitHub",
-            body: "Исходный код, текущая разработка и выпуски доступны всем в официальном репозитории проекта.",
+            body: "Это официальный репозиторий TalpaX на GitHub. Исходный код и выпуски сейчас не доступны публично.",
             button: "Открыть проект на GitHub"
         },
         hi: {
-            eyebrow: "ओपन सोर्स",
+            eyebrow: "GitHub",
             title: "GitHub पर TalpaX",
-            body: "सोर्स कोड, मौजूदा विकास और रिलीज़ आधिकारिक प्रोजेक्ट रिपॉज़िटरी में सार्वजनिक रूप से उपलब्ध हैं।",
+            body: "यह TalpaX का आधिकारिक GitHub रिपॉज़िटरी है। सोर्स कोड और रिलीज़ अभी सार्वजनिक रूप से उपलब्ध नहीं हैं।",
             button: "GitHub पर प्रोजेक्ट खोलें"
         },
         ta: {
-            eyebrow: "திறந்த மூலம்",
+            eyebrow: "GitHub",
             title: "GitHub-இல் TalpaX",
-            body: "மூலக் குறியீடு, தற்போதைய மேம்பாடு மற்றும் வெளியீடுகள் அதிகாரப்பூர்வ திட்டக் களஞ்சியத்தில் பொதுவாகக் கிடைக்கின்றன.",
+            body: "இது TalpaX-இன் அதிகாரப்பூர்வ GitHub களஞ்சியம். மூலக் குறியீடும் வெளியீடுகளும் தற்போது பொதுவாகக் கிடைக்கவில்லை.",
             button: "GitHub-இல் திட்டத்தைத் திறக்கவும்"
         },
         es: {
-            eyebrow: "Código abierto",
+            eyebrow: "GitHub",
             title: "TalpaX en GitHub",
-            body: "El código fuente, el desarrollo actual y las versiones están disponibles públicamente en el repositorio oficial del proyecto.",
+            body: "Este es el repositorio oficial de TalpaX en GitHub. El código fuente y las versiones no están disponibles públicamente por el momento.",
             button: "Abrir proyecto en GitHub"
         },
         pt: {
-            eyebrow: "Código aberto",
+            eyebrow: "GitHub",
             title: "TalpaX no GitHub",
-            body: "O código-fonte, o desenvolvimento atual e as versões estão disponíveis publicamente no repositório oficial do projeto.",
+            body: "Este é o repositório oficial do TalpaX no GitHub. O código-fonte e as versões não estão disponíveis publicamente neste momento.",
             button: "Abrir projeto no GitHub"
         },
         fr: {
-            eyebrow: "Open source",
+            eyebrow: "GitHub",
             title: "TalpaX sur GitHub",
-            body: "Le code source, le développement en cours et les versions sont accessibles publiquement dans le dépôt officiel du projet.",
+            body: "Il s’agit du dépôt GitHub officiel de TalpaX. Le code source et les versions ne sont actuellement pas accessibles au public.",
             button: "Ouvrir le projet sur GitHub"
         },
         it: {
-            eyebrow: "Open source",
+            eyebrow: "GitHub",
             title: "TalpaX su GitHub",
-            body: "Il codice sorgente, lo sviluppo attuale e le versioni sono disponibili pubblicamente nel repository ufficiale del progetto.",
+            body: "Questo è il repository GitHub ufficiale di TalpaX. Il codice sorgente e le versioni non sono attualmente disponibili al pubblico.",
             button: "Apri il progetto su GitHub"
         },
         ja: {
-            eyebrow: "オープンソース",
+            eyebrow: "GitHub",
             title: "GitHub の TalpaX",
-            body: "ソースコード、現在の開発状況、リリースは公式プロジェクトリポジトリで公開されています。",
+            body: "これは TalpaX の公式 GitHub リポジトリです。ソースコードとリリースは現在公開されていません。",
             button: "GitHub でプロジェクトを開く"
         },
         ar: {
-            eyebrow: "مفتوح المصدر",
+            eyebrow: "GitHub",
             title: "TalpaX على GitHub",
-            body: "الشفرة المصدرية والتطوير الحالي والإصدارات متاحة للجميع في مستودع المشروع الرسمي.",
+            body: "هذا هو مستودع TalpaX الرسمي على GitHub. الشفرة المصدرية والإصدارات غير متاحة للعامة حاليًا.",
             button: "فتح المشروع على GitHub"
         },
         ko: {
-            eyebrow: "오픈 소스",
+            eyebrow: "GitHub",
             title: "GitHub의 TalpaX",
-            body: "소스 코드, 현재 개발 내용과 릴리스가 공식 프로젝트 저장소에 공개되어 있습니다.",
+            body: "TalpaX의 공식 GitHub 저장소입니다. 소스 코드와 릴리스는 현재 공개되어 있지 않습니다.",
             button: "GitHub에서 프로젝트 열기"
         },
         tr: {
-            eyebrow: "Açık kaynak",
+            eyebrow: "GitHub",
             title: "GitHub'da TalpaX",
-            body: "Kaynak kodu, güncel geliştirmeler ve sürümler resmi proje deposunda herkese açıktır.",
+            body: "Bu, TalpaX'in resmi GitHub deposudur. Kaynak kodu ve sürümler şu anda herkese açık değildir.",
             button: "Projeyi GitHub'da aç"
         },
         nl: {
-            eyebrow: "Open source",
+            eyebrow: "GitHub",
             title: "TalpaX op GitHub",
-            body: "De broncode, actuele ontwikkeling en releases zijn openbaar beschikbaar in de officiële projectrepository.",
+            body: "Dit is de officiële GitHub-repository van TalpaX. De broncode en releases zijn momenteel niet openbaar beschikbaar.",
             button: "Project openen op GitHub"
         },
         pl: {
-            eyebrow: "Open source",
+            eyebrow: "GitHub",
             title: "TalpaX na GitHubie",
-            body: "Kod źródłowy, bieżące prace i wydania są publicznie dostępne w oficjalnym repozytorium projektu.",
+            body: "To oficjalne repozytorium TalpaX w serwisie GitHub. Kod źródłowy i wydania nie są obecnie dostępne publicznie.",
             button: "Otwórz projekt na GitHubie"
         }
     };
