@@ -1916,6 +1916,111 @@
         }
     };
 
+    var GITHUB_TEXT = {
+        de: {
+            eyebrow: "Open Source",
+            title: "TalpaX auf GitHub",
+            body: "Quellcode, aktuelle Entwicklung und Releases sind öffentlich im offiziellen Projekt-Repository verfügbar.",
+            button: "Projekt auf GitHub öffnen"
+        },
+        en: {
+            eyebrow: "Open source",
+            title: "TalpaX on GitHub",
+            body: "Source code, current development and releases are publicly available in the official project repository.",
+            button: "Open project on GitHub"
+        },
+        "zh-CN": {
+            eyebrow: "开源",
+            title: "GitHub 上的 TalpaX",
+            body: "源代码、最新开发进展和版本发布均可在官方项目仓库中公开查看。",
+            button: "在 GitHub 上打开项目"
+        },
+        "zh-TW": {
+            eyebrow: "開放原始碼",
+            title: "GitHub 上的 TalpaX",
+            body: "原始碼、最新開發進度與版本發布均可在官方專案儲存庫中公開查看。",
+            button: "在 GitHub 上開啟專案"
+        },
+        ru: {
+            eyebrow: "Открытый код",
+            title: "TalpaX на GitHub",
+            body: "Исходный код, текущая разработка и выпуски доступны всем в официальном репозитории проекта.",
+            button: "Открыть проект на GitHub"
+        },
+        hi: {
+            eyebrow: "ओपन सोर्स",
+            title: "GitHub पर TalpaX",
+            body: "सोर्स कोड, मौजूदा विकास और रिलीज़ आधिकारिक प्रोजेक्ट रिपॉज़िटरी में सार्वजनिक रूप से उपलब्ध हैं।",
+            button: "GitHub पर प्रोजेक्ट खोलें"
+        },
+        ta: {
+            eyebrow: "திறந்த மூலம்",
+            title: "GitHub-இல் TalpaX",
+            body: "மூலக் குறியீடு, தற்போதைய மேம்பாடு மற்றும் வெளியீடுகள் அதிகாரப்பூர்வ திட்டக் களஞ்சியத்தில் பொதுவாகக் கிடைக்கின்றன.",
+            button: "GitHub-இல் திட்டத்தைத் திறக்கவும்"
+        },
+        es: {
+            eyebrow: "Código abierto",
+            title: "TalpaX en GitHub",
+            body: "El código fuente, el desarrollo actual y las versiones están disponibles públicamente en el repositorio oficial del proyecto.",
+            button: "Abrir proyecto en GitHub"
+        },
+        pt: {
+            eyebrow: "Código aberto",
+            title: "TalpaX no GitHub",
+            body: "O código-fonte, o desenvolvimento atual e as versões estão disponíveis publicamente no repositório oficial do projeto.",
+            button: "Abrir projeto no GitHub"
+        },
+        fr: {
+            eyebrow: "Open source",
+            title: "TalpaX sur GitHub",
+            body: "Le code source, le développement en cours et les versions sont accessibles publiquement dans le dépôt officiel du projet.",
+            button: "Ouvrir le projet sur GitHub"
+        },
+        it: {
+            eyebrow: "Open source",
+            title: "TalpaX su GitHub",
+            body: "Il codice sorgente, lo sviluppo attuale e le versioni sono disponibili pubblicamente nel repository ufficiale del progetto.",
+            button: "Apri il progetto su GitHub"
+        },
+        ja: {
+            eyebrow: "オープンソース",
+            title: "GitHub の TalpaX",
+            body: "ソースコード、現在の開発状況、リリースは公式プロジェクトリポジトリで公開されています。",
+            button: "GitHub でプロジェクトを開く"
+        },
+        ar: {
+            eyebrow: "مفتوح المصدر",
+            title: "TalpaX على GitHub",
+            body: "الشفرة المصدرية والتطوير الحالي والإصدارات متاحة للجميع في مستودع المشروع الرسمي.",
+            button: "فتح المشروع على GitHub"
+        },
+        ko: {
+            eyebrow: "오픈 소스",
+            title: "GitHub의 TalpaX",
+            body: "소스 코드, 현재 개발 내용과 릴리스가 공식 프로젝트 저장소에 공개되어 있습니다.",
+            button: "GitHub에서 프로젝트 열기"
+        },
+        tr: {
+            eyebrow: "Açık kaynak",
+            title: "GitHub'da TalpaX",
+            body: "Kaynak kodu, güncel geliştirmeler ve sürümler resmi proje deposunda herkese açıktır.",
+            button: "Projeyi GitHub'da aç"
+        },
+        nl: {
+            eyebrow: "Open source",
+            title: "TalpaX op GitHub",
+            body: "De broncode, actuele ontwikkeling en releases zijn openbaar beschikbaar in de officiële projectrepository.",
+            button: "Project openen op GitHub"
+        },
+        pl: {
+            eyebrow: "Open source",
+            title: "TalpaX na GitHubie",
+            body: "Kod źródłowy, bieżące prace i wydania są publicznie dostępne w oficjalnym repozytorium projektu.",
+            button: "Otwórz projekt na GitHubie"
+        }
+    };
+
     /* ---------- Rendering ---------- */
 
     var DEFAULT = "de";
@@ -1959,6 +2064,16 @@
         }
         document.documentElement.lang = (LANGS[current] && LANGS[current].htmlLang) || "de";
         document.title = dict.hero.h1a + " – TalpaX";
+    }
+
+    function applyGitHubText() {
+        var dict = GITHUB_TEXT[current] || GITHUB_TEXT.en;
+        var nodes = document.querySelectorAll("[data-github-i18n]");
+        var i, key;
+        for (i = 0; i < nodes.length; i++) {
+            key = nodes[i].getAttribute("data-github-i18n");
+            if (dict[key]) setText(nodes[i], dict[key]);
+        }
     }
 
     function buildFeatures(dict) {
@@ -2077,15 +2192,35 @@
         }
     }
 
+    function labelResponsiveTables() {
+        var tables = document.querySelectorAll(".table-scroll table");
+        var t, i, j, headers, rows, cells, label, img;
+        for (t = 0; t < tables.length; t++) {
+            headers = tables[t].querySelectorAll("thead th");
+            rows = tables[t].querySelectorAll("tbody tr");
+            for (i = 0; i < rows.length; i++) {
+                cells = rows[i].children;
+                for (j = 1; j < cells.length; j++) {
+                    label = headers[j] ? headers[j].textContent.trim() : "";
+                    img = headers[j] ? headers[j].querySelector("img") : null;
+                    if (!label && img) label = img.alt;
+                    cells[j].setAttribute("data-label", label);
+                }
+            }
+        }
+    }
+
     function render() {
         var dict = T[current] || T[DEFAULT];
         apply(dict);
+        applyGitHubText();
         buildFeatures(dict);
         buildCmp(dict);
         buildHw(dict);
         buildPrivacy(dict);
         var cmpHead = el("cmpHead");
         if (cmpHead) cmpHead.innerHTML = BRAND_IMG;
+        labelResponsiveTables();
     }
 
     function buildLangSelect() {
