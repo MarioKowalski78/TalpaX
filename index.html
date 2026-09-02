@@ -247,6 +247,50 @@
         font-size: .94rem;
     }
 
+    .github-panel {
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        gap: 24px;
+        align-items: center;
+        padding: 30px;
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        background: var(--card);
+        box-shadow: 0 8px 22px rgba(35, 24, 42, .05);
+    }
+    .github-icon {
+        display: grid;
+        place-items: center;
+        width: 52px;
+        height: 52px;
+        border-radius: 16px;
+        background: var(--violet-deep);
+        color: #fff;
+        font-weight: 900;
+        font-size: 1.22rem;
+    }
+    .github-panel h2 {
+        color: var(--violet-deep);
+        font-size: clamp(1.45rem, 3vw, 2rem);
+        line-height: 1.15;
+    }
+    .github-panel p {
+        margin-top: 8px;
+        color: var(--muted);
+    }
+    .github-url {
+        display: inline-block;
+        margin-top: 10px;
+        color: var(--teal-deep);
+        font-weight: 800;
+        overflow-wrap: anywhere;
+    }
+    .btn-github {
+        border: 2px solid var(--violet-mid);
+        color: var(--violet);
+        white-space: nowrap;
+    }
+
     .support {
         display: grid;
         grid-template-columns: 1.4fr .8fr;
@@ -274,6 +318,8 @@
         .proof-grid { grid-template-columns: repeat(2, 1fr); }
         .dialogue-grid { grid-template-columns: 1fr; }
         .why-grid { grid-template-columns: 1fr; }
+        .github-panel { grid-template-columns: 1fr; }
+        .btn-github { justify-self: start; }
     }
     @media (max-width: 640px) {
         .wrap { width: min(100% - 28px, 1060px); }
@@ -301,6 +347,7 @@
                 <a href="#beispiele" data-t="navExamples"></a>
                 <a href="#nachweise" data-t="navEvidence"></a>
                 <a href="#warum" data-t="navWhy"></a>
+                <a href="#github" data-t="navGitHub"></a>
                 <a href="#unterstuetzen" data-t="navSupport"></a>
             </nav>
             <select id="lang" class="lang-select" aria-label="Sprache / Language / Язык"></select>
@@ -394,7 +441,22 @@
         </div>
     </section>
 
-    <section id="unterstuetzen" class="alt">
+    <section id="github" class="alt">
+        <div class="wrap">
+            <div class="github-panel">
+                <div class="github-icon" aria-hidden="true">GH</div>
+                <div>
+                    <div class="eyebrow" data-t="githubEyebrow"></div>
+                    <h2 data-t="githubTitle"></h2>
+                    <p data-t="githubBody"></p>
+                    <a class="github-url" href="https://github.com/MarioKowalski78/TalpaX" target="_blank" rel="noopener noreferrer">github.com/MarioKowalski78/TalpaX</a>
+                </div>
+                <a class="btn btn-github" href="https://github.com/MarioKowalski78/TalpaX" target="_blank" rel="noopener noreferrer" data-t="githubButton"></a>
+            </div>
+        </div>
+    </section>
+
+    <section id="unterstuetzen">
         <div class="wrap">
             <div class="support">
                 <div>
@@ -415,6 +477,6 @@
     </div>
 </footer>
 
-<script src="i18n.js"></script>
+<script src="i18n.js?v=20260902-1"></script>
 </body>
 </html>

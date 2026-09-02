@@ -18,8 +18,13 @@
       <stop offset="1" stop-color="#35203d"/>
     </linearGradient>
     <linearGradient id="word-edge" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="0.55" stop-color="#efe8f4"/>
+      <stop offset="1" stop-color="#d5c6dd"/>
+    </linearGradient>
+    <linearGradient id="word-fill" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0" stop-color="#765983"/>
-      <stop offset="0.52" stop-color="#4b3153"/>
+      <stop offset="0.48" stop-color="#4b3153"/>
       <stop offset="1" stop-color="#2f1b36"/>
     </linearGradient>
     <filter id="tile-shadow" x="-25%" y="-25%" width="150%" height="165%">
@@ -36,7 +41,7 @@
     <rect x="492" y="18" width="212" height="212" rx="36" fill="none" stroke="url(#edge)" stroke-width="6"/>
   </g>
 
-  <g fill="#ffffff" stroke="url(#word-edge)" stroke-width="78" stroke-linejoin="round" paint-order="stroke fill">
+  <g fill="url(#word-fill)" stroke="url(#word-edge)" stroke-width="42" stroke-linejoin="round" paint-order="stroke fill">
     <path d="M52 1038V1327H1204V1038ZM398 0V969H858V0Z" transform="translate(30 175) scale(.09 -.09)"/>
     <path d="M804 0V797H175V929L308 1062H971L1236 797V0ZM264 0 86 175V441L264 618H734V434H506V248H734V131L602 0Z" transform="translate(137 175) scale(.09 -.09)"/>
     <path d="M352 0 104 248V1467H546V265H744V0Z" transform="translate(251 175) scale(.09 -.09)"/>

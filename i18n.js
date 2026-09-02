@@ -462,6 +462,30 @@
         }
     });
 
+    const pageAdditions = {
+        de: {
+            navGitHub: "GitHub",
+            githubEyebrow: "Offizielles Repository",
+            githubTitle: "TalpaX auf GitHub",
+            githubBody: "Dies ist das offizielle GitHub-Repository von TalpaX. Quellcode und Releases sind derzeit nicht öffentlich verfügbar.",
+            githubButton: "Repository ansehen"
+        },
+        en: {
+            navGitHub: "GitHub",
+            githubEyebrow: "Official repository",
+            githubTitle: "TalpaX on GitHub",
+            githubBody: "This is the official GitHub repository for TalpaX. Source code and releases are not currently publicly available.",
+            githubButton: "View repository"
+        },
+        ru: {
+            navGitHub: "GitHub",
+            githubEyebrow: "Официальный репозиторий",
+            githubTitle: "TalpaX на GitHub",
+            githubBody: "Это официальный репозиторий TalpaX на GitHub. Исходный код и релизы сейчас не доступны публично.",
+            githubButton: "Открыть репозиторий"
+        }
+    };
+
     const select = document.getElementById("lang");
     languages.forEach(function (language) {
         const option = document.createElement("option");
@@ -471,7 +495,12 @@
     });
 
     function applyLanguage(code) {
-        const dictionary = text[code] || text.de;
+        const dictionary = Object.assign(
+            {},
+            pageAdditions.en,
+            pageAdditions[code] || {},
+            text[code] || text.de
+        );
         document.documentElement.lang = code;
         document.documentElement.dir = code === "ar" ? "rtl" : "ltr";
         document.title = dictionary.title;
