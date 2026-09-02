@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>TalpaX – Lokale KI-Suche für private Dateien</title>
-<meta name="description" content="TalpaX ist ein Entwicklungsprojekt für lokale KI-Suche über Fotos, Videos, Dokumente und Audio auf dem eigenen Server.">
+<title>TalpaX – Dein persönlicher lokaler KI-Bibliothekar</title>
+<meta name="description" content="TalpaX entsteht als persönlicher KI-Bibliothekar für die lokale, nachvollziehbare Suche in privaten Fotos, Videos, Dokumenten und Audio.">
 <style>
     :root {
         --violet: #4b3153;
@@ -94,6 +94,7 @@
         font-size: clamp(2.45rem, 6.5vw, 4.6rem);
         line-height: 1.02;
         letter-spacing: -.045em;
+        overflow-wrap: anywhere;
     }
     .hero h1 .accent { color: var(--teal-deep); }
     .hero .lede {
@@ -153,21 +154,57 @@
     .section-head p { color: var(--muted); font-size: 1.04rem; }
 
     .proof-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
-    .example-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
-    .example {
+    .dialogue-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .dialogue-card {
         display: flex;
-        gap: 14px;
-        align-items: flex-start;
-        padding: 20px 22px;
+        flex-direction: column;
+        gap: 12px;
+        padding: 22px;
         border: 1px solid var(--line);
-        border-radius: 16px;
+        border-radius: 20px;
         background: var(--card);
-        color: var(--violet-deep);
-        font-size: 1.02rem;
-        font-weight: 750;
-        box-shadow: 0 5px 16px rgba(35, 24, 42, .04);
+        box-shadow: 0 7px 20px rgba(35, 24, 42, .05);
     }
-    .example::before { content: "→"; flex: 0 0 auto; color: var(--teal-deep); font-weight: 900; }
+    .dialogue-label {
+        color: var(--violet-mid);
+        font-size: .73rem;
+        font-weight: 850;
+        letter-spacing: .09em;
+        text-transform: uppercase;
+    }
+    .message {
+        max-width: 92%;
+        padding: 12px 15px;
+        border-radius: 15px;
+        color: var(--violet-deep);
+        font-size: .96rem;
+    }
+    .message.user {
+        align-self: flex-end;
+        border-bottom-right-radius: 5px;
+        background: var(--soft);
+        font-weight: 700;
+    }
+    .message.talpax {
+        align-self: flex-start;
+        border-bottom-left-radius: 5px;
+        background: #e9f7f5;
+    }
+    .message.talpax::before {
+        content: "TalpaX";
+        display: block;
+        margin-bottom: 3px;
+        color: var(--teal-deep);
+        font-size: .72rem;
+        font-weight: 850;
+        letter-spacing: .04em;
+    }
+    .dialogue-meta {
+        padding-top: 10px;
+        border-top: 1px solid var(--line);
+        color: var(--muted);
+        font-size: .83rem;
+    }
     .example-note {
         margin: 22px auto 0;
         max-width: 760px;
@@ -235,7 +272,7 @@
         .header-inner { align-items: flex-start; padding: 18px 0; }
         .header-actions { align-items: flex-end; flex-direction: column-reverse; gap: 8px; }
         .proof-grid { grid-template-columns: repeat(2, 1fr); }
-        .example-grid { grid-template-columns: 1fr; }
+        .dialogue-grid { grid-template-columns: 1fr; }
         .why-grid { grid-template-columns: 1fr; }
     }
     @media (max-width: 640px) {
@@ -278,8 +315,8 @@
             <h1><span data-t="heroA"></span> <span class="accent" data-t="heroB"></span></h1>
             <p class="lede" data-t="lede"></p>
             <div class="hero-actions">
-                <a class="btn btn-primary" href="#nachweise" data-t="ctaEvidence"></a>
-                <a class="btn btn-secondary" href="#unterstuetzen" data-t="ctaSupport"></a>
+                <a class="btn btn-primary" href="#beispiele" data-t="ctaDialogue"></a>
+                <a class="btn btn-secondary" href="#nachweise" data-t="ctaEvidence"></a>
             </div>
             <div class="signal-bar" aria-label="TalpaX Kurzprofil">
                 <div class="signal"><strong data-t="signal1Title"></strong><span data-t="signal1Body"></span></div>
@@ -296,12 +333,30 @@
                 <h2 data-t="examplesTitle"></h2>
                 <p data-t="examplesIntro"></p>
             </div>
-            <div class="example-grid">
-                <div class="example" data-t="example1"></div>
-                <div class="example" data-t="example2"></div>
-                <div class="example" data-t="example3"></div>
-                <div class="example" data-t="example4"></div>
-                <div class="example" data-t="example5"></div>
+            <div class="dialogue-grid">
+                <article class="dialogue-card">
+                    <div class="dialogue-label" data-t="dialogue1Label"></div>
+                    <div class="message talpax" data-t="dialogue1Assistant"></div>
+                    <div class="dialogue-meta" data-t="dialogue1Meta"></div>
+                </article>
+                <article class="dialogue-card">
+                    <div class="dialogue-label" data-t="dialogue2Label"></div>
+                    <div class="message user" data-t="dialogue2User"></div>
+                    <div class="message talpax" data-t="dialogue2Assistant"></div>
+                    <div class="dialogue-meta" data-t="dialogue2Meta"></div>
+                </article>
+                <article class="dialogue-card">
+                    <div class="dialogue-label" data-t="dialogue3Label"></div>
+                    <div class="message user" data-t="dialogue3User"></div>
+                    <div class="message talpax" data-t="dialogue3Assistant"></div>
+                    <div class="dialogue-meta" data-t="dialogue3Meta"></div>
+                </article>
+                <article class="dialogue-card">
+                    <div class="dialogue-label" data-t="dialogue4Label"></div>
+                    <div class="message user" data-t="dialogue4User"></div>
+                    <div class="message talpax" data-t="dialogue4Assistant"></div>
+                    <div class="dialogue-meta" data-t="dialogue4Meta"></div>
+                </article>
             </div>
             <p class="example-note" data-t="examplesNote"></p>
         </div>
