@@ -3,611 +3,363 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>TalpaX – Ihre Private AI-Suche</title>
-<meta name="description" content="TalpaX ist eine vollständig lokale Such- und Analyseplattform für private Dateien: multimodale Suche, Gesichtserkennung und sichere Dateiorganisation – ganz ohne Cloud.">
+<title>TalpaX – Lokale KI-Suche für private Dateien</title>
+<meta name="description" content="TalpaX ist ein Entwicklungsprojekt für lokale KI-Suche über Fotos, Videos, Dokumente und Audio auf dem eigenen Server.">
 <style>
     :root {
         --violet: #4b3153;
         --violet-deep: #2f1b36;
         --violet-mid: #765983;
         --teal: #78c8c3;
-        --ink: #26222b;
+        --teal-deep: #2e817b;
+        --ink: #252129;
         --muted: #6b6270;
-        --paper: #f6f4f8;
-        --card: #ffffff;
+        --paper: #f7f5f9;
+        --card: #fff;
         --line: #e4deea;
-        --accent-soft: #f0eafa;
-        --gfm-green: #00b964;
-        --gfm-green-deep: #00914d;
-        --header-offset: 120px;
+        --soft: #f0eafa;
+        --green: #00a85a;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
-
     html { scroll-behavior: smooth; }
-
     body {
         color: var(--ink);
         background:
-            radial-gradient(ellipse at 70% -10%, rgba(120, 200, 195, .18) 0%, transparent 55%),
-            radial-gradient(ellipse at 10% 10%, rgba(120, 89, 131, .12) 0%, transparent 50%),
+            radial-gradient(circle at 80% 0%, rgba(120, 200, 195, .17), transparent 38%),
+            radial-gradient(circle at 10% 12%, rgba(118, 89, 131, .13), transparent 36%),
             var(--paper);
-        font-family: system-ui, -apple-system, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", "Noto Sans CJK", sans-serif;
-        line-height: 1.6;
+        font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", sans-serif;
+        line-height: 1.55;
         -webkit-font-smoothing: antialiased;
     }
 
-    .wrap { width: min(1080px, calc(100% - 40px)); margin: 0 auto; }
+    .wrap { width: min(1060px, calc(100% - 40px)); margin: 0 auto; }
+    a { color: inherit; }
 
-    /* ---------- Header ---------- */
     header {
-        padding: 26px 0 18px;
-        border-bottom: 1px solid var(--line);
-        background: rgba(255, 255, 255, .94);
-        backdrop-filter: blur(6px);
         position: sticky;
         top: 0;
         z-index: 10;
+        border-bottom: 1px solid rgba(228, 222, 234, .9);
+        background: rgba(255, 255, 255, .92);
+        backdrop-filter: blur(12px);
     }
     .header-inner {
+        min-height: 82px;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        gap: 20px;
-        flex-wrap: wrap;
+        gap: 24px;
     }
-    .header-left { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
-    .brand-logo { width: 180px; display: block; }
-    .brand-logo img { width: 100%; height: auto; display: block; }
-    .brand-inline {
-        display: inline-block;
-        height: 1.65em;
-        width: auto;
-        vertical-align: -0.45em;
-        margin: 0 0.16em;
+    .brand { width: 168px; display: block; }
+    .brand img { width: 100%; display: block; }
+    .header-actions { display: flex; align-items: center; gap: 18px; }
+    nav { display: flex; gap: 4px; }
+    nav a {
+        padding: 8px 11px;
+        border-radius: 999px;
+        color: var(--violet);
+        text-decoration: none;
+        font-size: .9rem;
+        font-weight: 700;
     }
-    .lang-wrap { position: relative; }
+    nav a:hover { background: var(--soft); }
     .lang-select {
         appearance: none;
-        -webkit-appearance: none;
         border: 1px solid var(--violet-mid);
         border-radius: 999px;
         background: #fff;
         color: var(--violet);
-        font-weight: 600;
-        font-size: .92rem;
-        padding: 9px 34px 9px 16px;
+        padding: 9px 34px 9px 14px;
+        font-weight: 700;
         cursor: pointer;
         background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%234b3153' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
         background-repeat: no-repeat;
-        background-position: right 14px center;
+        background-position: right 13px center;
     }
-    .lang-select option { color: var(--ink); font-weight: 400; }
-    nav { display: flex; gap: 8px; flex-wrap: wrap; }
-    nav a {
-        color: var(--violet);
-        text-decoration: none;
-        font-weight: 600;
-        font-size: .92rem;
-        padding: 8px 14px;
-        border-radius: 999px;
-        transition: background .15s ease;
-    }
-    nav a:hover { background: var(--accent-soft); }
 
-    /* ---------- Hero ---------- */
-    .hero { padding: 90px 0 70px; text-align: center; }
-    .hero .kick {
-        display: inline-block;
+    .hero { padding: 92px 0 74px; text-align: center; }
+    .kick, .eyebrow {
         color: var(--violet-mid);
-        font-weight: 700;
-        letter-spacing: .14em;
+        font-size: .78rem;
+        font-weight: 800;
+        letter-spacing: .13em;
         text-transform: uppercase;
-        font-size: .82rem;
-        margin-bottom: 18px;
     }
     .hero h1 {
-        font-size: clamp(2.1rem, 5vw, 3.3rem);
-        line-height: 1.12;
+        max-width: 900px;
+        margin: 18px auto 22px;
         color: var(--violet-deep);
-        max-width: 820px;
-        margin: 0 auto 22px;
-        font-weight: 800;
+        font-size: clamp(2.45rem, 6.5vw, 4.6rem);
+        line-height: 1.02;
+        letter-spacing: -.045em;
     }
-    .hero h1 span.t-int { color: var(--teal); }
-    .hero p.lede { max-width: 700px; margin: 0 auto 34px; color: var(--muted); font-size: 1.14rem; }
-    .hero-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .hero h1 .accent { color: var(--teal-deep); }
+    .hero .lede {
+        max-width: 760px;
+        margin: 0 auto;
+        color: var(--muted);
+        font-size: clamp(1.08rem, 2vw, 1.28rem);
+    }
+    .hero-actions {
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+        margin-top: 34px;
+        flex-wrap: wrap;
+    }
     .btn {
         display: inline-block;
-        padding: 14px 28px;
+        padding: 13px 24px;
         border-radius: 999px;
-        font-weight: 700;
         text-decoration: none;
-        font-size: 1rem;
+        font-weight: 800;
         transition: transform .15s ease, box-shadow .15s ease;
     }
     .btn:hover { transform: translateY(-2px); }
-    .btn-primary { background: linear-gradient(135deg, var(--violet-mid), var(--violet)); color: #fff; box-shadow: 0 10px 24px rgba(75, 49, 83, .28); }
-    .btn-ghost { border: 2px solid var(--violet-mid); color: var(--violet); }
-
-    /* ---------- Sections ---------- */
-    section { padding: 70px 0; }
-    section[id] { scroll-margin-top: calc(var(--header-offset) + 16px); }
-    section.alt { background: #fff; border-block: 1px solid var(--line); }
-    .section-head { max-width: 760px; margin: 0 auto 46px; text-align: center; }
-    .section-head .eyebrow {
-        color: var(--violet-mid);
-        font-weight: 700;
-        letter-spacing: .12em;
-        text-transform: uppercase;
-        font-size: .8rem;
-        margin-bottom: 10px;
-    }
-    .section-head h2 { font-size: clamp(1.6rem, 3.4vw, 2.3rem); color: var(--violet-deep); margin-bottom: 12px; }
-    .section-head p { color: var(--muted); }
-
-    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 22px; }
-    #features .grid { grid-template-columns: repeat(3, 1fr); }
-    @media (max-width: 900px) { #features .grid { grid-template-columns: repeat(2, 1fr); } }
-    @media (max-width: 560px) { #features .grid { grid-template-columns: 1fr; } }
-    .card { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 26px; box-shadow: 0 6px 18px rgba(30, 20, 40, .05); }
-    .card h3 { color: var(--violet); margin-bottom: 8px; font-size: 1.12rem; display: flex; align-items: center; gap: 10px; }
-    .card h3 .tick { color: var(--teal); font-size: 1.3rem; line-height: 1; }
-    .card p { color: var(--muted); font-size: .98rem; }
-
-    /* ---------- GitHub ---------- */
-    .github-section { padding: 56px 0; }
-    .github-panel {
-        display: grid;
-        grid-template-columns: auto minmax(0, 1fr) auto;
-        gap: 24px;
-        align-items: center;
-        padding: 32px 36px;
-        overflow: hidden;
-        border: 1px solid rgba(120, 200, 195, .28);
-        border-radius: 22px;
-        background:
-            radial-gradient(circle at 90% 0%, rgba(120, 200, 195, .20), transparent 38%),
-            linear-gradient(135deg, #302136, #1f1723);
+    .btn-primary {
+        background: linear-gradient(135deg, var(--violet-mid), var(--violet));
         color: #fff;
-        box-shadow: 0 12px 30px rgba(47, 27, 54, .18);
+        box-shadow: 0 12px 25px rgba(75, 49, 83, .24);
     }
-    .github-icon {
-        display: grid;
-        width: 68px;
-        height: 68px;
-        place-items: center;
-        border: 1px solid rgba(255, 255, 255, .18);
-        border-radius: 18px;
-        background: rgba(255, 255, 255, .08);
-        color: var(--teal);
-    }
-    .github-icon svg { width: 38px; height: 38px; }
-    .github-copy .eyebrow {
-        margin-bottom: 4px;
-        color: var(--teal);
-        font-size: .76rem;
-        font-weight: 800;
-        letter-spacing: .12em;
-        text-transform: uppercase;
-    }
-    .github-copy h2 { margin-bottom: 4px; font-size: clamp(1.35rem, 2.8vw, 1.85rem); line-height: 1.25; }
-    .github-copy p { max-width: 660px; color: #d7cedb; font-size: .96rem; }
-    .github-repo { margin-top: 8px; color: #a99caf; font-family: ui-monospace, "SFMono-Regular", Consolas, monospace; font-size: .8rem; }
-    .btn-github {
-        border: 1px solid rgba(255, 255, 255, .22);
-        background: #fff;
-        color: var(--violet-deep);
-        box-shadow: 0 8px 20px rgba(0, 0, 0, .18);
-        text-align: center;
-        white-space: nowrap;
-    }
-    .btn-github:hover { box-shadow: 0 10px 24px rgba(0, 0, 0, .24); }
-    @media (max-width: 820px) {
-        .github-panel { grid-template-columns: auto minmax(0, 1fr); }
-        .github-panel .btn-github { grid-column: 1 / -1; justify-self: start; }
-    }
-    @media (max-width: 520px) {
-        .github-panel { grid-template-columns: 1fr; padding: 26px 22px; }
-        .github-icon { width: 58px; height: 58px; }
-        .github-panel .btn-github { grid-column: auto; width: 100%; white-space: normal; }
-    }
+    .btn-secondary { border: 2px solid var(--violet-mid); color: var(--violet); }
 
-    /* ---------- Comparison ---------- */
-    .compare { padding: 70px 0; }
-    .compare .note {
-        background: var(--accent-soft);
-        border: 1px solid #e2d6f0;
-        border-left: 4px solid var(--violet-mid);
-        border-radius: 12px;
-        padding: 16px 20px;
-        color: #5b4663;
-        font-size: .95rem;
-        margin-bottom: 26px;
+    .signal-bar {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1px;
+        max-width: 900px;
+        margin: 58px auto 0;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        background: var(--line);
+        box-shadow: 0 10px 26px rgba(40, 25, 45, .06);
     }
-    .table-scroll {
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
+    .signal { background: rgba(255,255,255,.92); padding: 22px 18px; }
+    .signal strong { display: block; color: var(--violet); font-size: 1.06rem; }
+    .signal span { color: var(--muted); font-size: .9rem; }
+
+    section { padding: 72px 0; scroll-margin-top: 90px; }
+    section.alt { background: #fff; border-block: 1px solid var(--line); }
+    .section-head { max-width: 760px; margin: 0 auto 34px; text-align: center; }
+    .section-head h2 {
+        margin: 10px 0 10px;
+        color: var(--violet-deep);
+        font-size: clamp(1.8rem, 4vw, 2.55rem);
+        line-height: 1.15;
+    }
+    .section-head p { color: var(--muted); font-size: 1.04rem; }
+
+    .proof-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .example-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+    .example {
+        display: flex;
+        gap: 14px;
+        align-items: flex-start;
+        padding: 20px 22px;
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        background: var(--card);
+        color: var(--violet-deep);
+        font-size: 1.02rem;
+        font-weight: 750;
+        box-shadow: 0 5px 16px rgba(35, 24, 42, .04);
+    }
+    .example::before { content: "→"; flex: 0 0 auto; color: var(--teal-deep); font-weight: 900; }
+    .example-note {
+        margin: 22px auto 0;
+        max-width: 760px;
+        color: var(--muted);
+        text-align: center;
+        font-size: .9rem;
+    }
+    .proof {
+        min-height: 178px;
+        padding: 24px;
         border: 1px solid var(--line);
         border-radius: 18px;
         background: var(--card);
+        box-shadow: 0 7px 20px rgba(35, 24, 42, .05);
     }
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        table-layout: fixed;
-        min-width: 780px;
-        font-size: .95rem;
-    }
-    table col:first-child { width: 30%; }
-    table col:not(:first-child) { width: 23.333%; }
-    th, td { text-align: left; padding: 16px 18px; border-bottom: 1px solid var(--line); vertical-align: top; }
-    thead th { background: linear-gradient(135deg, var(--violet), var(--violet-deep)); color: #fff; font-weight: 700; }
-    tbody tr:last-child td { border-bottom: 0; }
-    tbody th { color: var(--violet); font-weight: 700; }
-    th, td { overflow-wrap: break-word; hyphens: auto; }
-    td.talpax { background: #fbf9fd; }
-    .tag {
-        display: inline-block;
-        font-size: .72rem;
-        font-weight: 700;
-        letter-spacing: .05em;
-        text-transform: uppercase;
-        padding: 2px 8px;
-        border-radius: 999px;
-        margin-left: 6px;
-        vertical-align: middle;
-    }
-    .tag-core { background: #e4f3f1; color: #2f7a74; }
-    .tag-context { background: #efeaf5; color: var(--violet-mid); }
-    .compare .foot { margin-top: 18px; color: #4f4755; font-size: .92rem; }
+    .proof .num { color: var(--teal-deep); font-size: 1.8rem; font-weight: 900; line-height: 1; }
+    .proof h3 { margin: 14px 0 7px; color: var(--violet); font-size: 1.02rem; }
+    .proof p { color: var(--muted); font-size: .92rem; }
 
-    @media (max-width: 820px) {
-        .table-scroll {
-            overflow: visible;
-            border: 0;
-            border-radius: 0;
-            background: transparent;
-        }
-        table {
-            min-width: 0;
-            table-layout: auto;
-            border-collapse: separate;
-        }
-        table colgroup,
-        table thead { display: none; }
-        table tbody {
-            display: grid;
-            gap: 14px;
-        }
-        table tbody tr {
-            display: block;
-            overflow: hidden;
-            border: 1px solid var(--line);
-            border-radius: 14px;
-            background: var(--card);
-            box-shadow: 0 4px 14px rgba(30, 20, 40, .04);
-        }
-        table tbody th {
-            display: block;
-            padding: 13px 16px;
-            border-bottom: 1px solid var(--line);
-            background: var(--accent-soft);
-            color: var(--violet-deep);
-        }
-        table tbody td {
-            display: grid;
-            grid-template-columns: minmax(100px, 34%) minmax(0, 1fr);
-            gap: 12px;
-            padding: 12px 16px;
-            border-bottom: 1px solid var(--line);
-        }
-        table tbody td::before {
-            content: attr(data-label);
-            color: var(--violet);
-            font-size: .78rem;
-            font-weight: 700;
-            line-height: 1.45;
-        }
-        table tbody tr:last-child td { border-bottom: 1px solid var(--line); }
-        table tbody tr td:last-child { border-bottom: 0; }
-    }
-
-    /* ---------- Hardware ---------- */
-    .hw-block { margin-top: 42px; }
-    .section-head.sub { text-align: left; margin: 0 0 18px; max-width: 720px; }
-    .section-head.sub h3 { color: var(--violet-deep); font-size: 1.3rem; margin-bottom: 6px; }
-    .section-head.sub p { color: var(--muted); font-size: .98rem; }
-    .requirements { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 14px; }
-    .req { background: var(--card); border: 1px solid var(--line); border-left: 4px solid var(--violet-mid); border-radius: 12px; padding: 14px 18px; }
-    .req-label { font-weight: 700; color: var(--violet); font-size: .82rem; letter-spacing: .06em; text-transform: uppercase; margin-bottom: 4px; }
-    .req-val { color: var(--ink); font-size: .98rem; }
-    .hw-grid { grid-template-columns: repeat(2, 1fr); }
-    @media (max-width: 720px) { .hw-grid { grid-template-columns: 1fr; } }
-
-    /* ---------- GoFundMe ---------- */
-    .gfm { display: grid; grid-template-columns: 1.4fr 1fr; gap: 26px; align-items: stretch; }
-    .gfm-copy p { color: var(--muted); margin-bottom: 14px; font-size: 1rem; }
-    .gfm-copy p:last-child { margin-bottom: 0; }
-    .gfm-action {
-        background: #f2fbf7;
-        border: 1px solid #bfe8d5;
-        border-radius: 18px;
+    .why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .why-card {
         padding: 28px;
-        box-shadow: 0 6px 18px rgba(0, 150, 80, .10);
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 12px;
+        border-radius: 20px;
+        color: #fff;
+        background:
+            radial-gradient(circle at 100% 0%, rgba(120,200,195,.22), transparent 40%),
+            linear-gradient(145deg, #392441, #251829);
     }
-    .gfm-tag { display: inline-block; font-size: .72rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; padding: 3px 10px; border-radius: 999px; background: var(--gfm-green); color: #fff; }
-    .gfm-action h3 { color: #006b3c; font-size: 1.2rem; }
-    .gfm-meta { color: var(--muted); font-size: .9rem; margin: 0; }
-    .gfm-note { color: #3b7a5b; font-size: .88rem; margin: 4px 0 0; }
-    .btn-gfm { background: linear-gradient(135deg, var(--gfm-green), var(--gfm-green-deep)); color: #fff; box-shadow: 0 10px 24px rgba(0, 150, 80, .28); }
-    .btn-gfm:hover { box-shadow: 0 12px 28px rgba(0, 150, 80, .34); }
-    @media (max-width: 760px) { .gfm { grid-template-columns: 1fr; } }
+    .why-card .icon { color: var(--teal); font-size: 1.5rem; font-weight: 900; }
+    .why-card h3 { margin: 12px 0 8px; font-size: 1.13rem; }
+    .why-card p { color: #d8cedc; font-size: .94rem; }
 
-    /* ---------- Privacy ---------- */
-    .privacy-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 22px; }
-    .privacy-item { text-align: center; padding: 12px 8px; }
-    .privacy-item .num { font-size: 1.9rem; font-weight: 800; color: var(--teal); line-height: 1; }
-    .privacy-item h4 { color: var(--violet); margin: 10px 0 6px; }
+    .status-note {
+        margin-top: 26px;
+        padding: 18px 20px;
+        border-left: 4px solid var(--violet-mid);
+        border-radius: 12px;
+        background: var(--soft);
+        color: #5c4864;
+        font-size: .94rem;
+    }
 
-    /* ---------- Footer ---------- */
-    footer { padding: 46px 0 54px; background: var(--violet-deep); color: #cfc3d6; }
-    footer .wrap { display: flex; justify-content: space-between; gap: 24px; flex-wrap: wrap; align-items: center; }
-    footer a { color: var(--teal); text-decoration: none; }
-    footer a:hover { text-decoration: underline; }
-    footer .fine { font-size: .82rem; color: #9c8fa5; margin-top: 8px; }
-    .footer-logo { width: 150px; }
-    .footer-logo img { width: 100%; height: auto; display: block; }
+    .support {
+        display: grid;
+        grid-template-columns: 1.4fr .8fr;
+        gap: 28px;
+        align-items: center;
+        padding: 38px;
+        border: 1px solid #bee7d4;
+        border-radius: 24px;
+        background: linear-gradient(135deg, #f5fcf8, #eef9f7);
+        box-shadow: 0 10px 28px rgba(0, 140, 75, .08);
+    }
+    .support h2 { margin: 9px 0 10px; color: #075c38; font-size: clamp(1.6rem, 3vw, 2.2rem); }
+    .support p { color: #45665a; }
+    .btn-support { background: linear-gradient(135deg, #00b964, #008e4c); color: #fff; text-align: center; }
 
+    footer { padding: 36px 0; background: var(--violet-deep); color: #cfc3d6; }
+    .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .footer-logo { width: 132px; filter: brightness(1.25); }
+    .footer-logo img { width: 100%; display: block; }
+    footer p { max-width: 700px; font-size: .84rem; color: #a99cad; }
+
+    @media (max-width: 880px) {
+        .header-inner { align-items: flex-start; padding: 18px 0; }
+        .header-actions { align-items: flex-end; flex-direction: column-reverse; gap: 8px; }
+        .proof-grid { grid-template-columns: repeat(2, 1fr); }
+        .example-grid { grid-template-columns: 1fr; }
+        .why-grid { grid-template-columns: 1fr; }
+    }
     @media (max-width: 640px) {
-        .wrap { width: min(100% - 28px, 1080px); }
-        .header-inner { flex-direction: column; align-items: flex-start; }
-        .header-left { width: 100%; gap: 12px; }
-        .brand-logo { width: 150px; }
-        .lang-wrap { max-width: 100%; }
-        .lang-select { max-width: 100%; }
-        nav { gap: 2px; }
-        nav a { padding: 7px 9px; font-size: .86rem; }
-        .hero { padding: 60px 0 50px; }
+        .wrap { width: min(100% - 28px, 1060px); }
+        .header-inner { min-height: auto; flex-direction: column; gap: 14px; }
+        .header-actions { width: 100%; align-items: flex-start; }
+        nav { width: 100%; overflow-x: auto; }
+        nav a { white-space: nowrap; }
+        .brand { width: 150px; }
+        .hero { padding: 64px 0 48px; }
+        .hero h1 { font-size: clamp(2.3rem, 13vw, 3.5rem); }
+        .signal-bar { grid-template-columns: 1fr; }
+        .proof-grid { grid-template-columns: 1fr; }
         section { padding: 54px 0; }
-        th, td { overflow-wrap: anywhere; }
-    }
-
-    @media (max-width: 420px) {
-        .header-left { align-items: flex-start; flex-direction: column; }
-        .lang-select { width: 100%; }
-        table tbody td { grid-template-columns: 1fr; gap: 4px; }
+        .support { grid-template-columns: 1fr; padding: 28px 22px; }
+        .footer-inner { align-items: flex-start; flex-direction: column; }
     }
 </style>
 </head>
 <body>
-
 <header>
     <div class="wrap header-inner">
-        <div class="header-left">
-            <div class="brand-logo">
-                <img src="talpax-wordmark.svg" alt="TalpaX">
-            </div>
-            <div class="lang-wrap">
-                <select id="lang" class="lang-select" aria-label="Sprache / Language"></select>
-            </div>
+        <a class="brand" href="#top" aria-label="TalpaX"><img src="talpax-wordmark.svg" alt="TalpaX"></a>
+        <div class="header-actions">
+            <nav aria-label="Hauptnavigation">
+                <a href="#beispiele" data-t="navExamples"></a>
+                <a href="#nachweise" data-t="navEvidence"></a>
+                <a href="#warum" data-t="navWhy"></a>
+                <a href="#unterstuetzen" data-t="navSupport"></a>
+            </nav>
+            <select id="lang" class="lang-select" aria-label="Sprache / Language / Язык"></select>
         </div>
-        <nav>
-            <a href="#features" data-i18n="nav.functions"></a>
-            <a href="#github">GitHub</a>
-            <a href="#vergleich" data-i18n="nav.compare"></a>
-            <a href="#hardware" data-i18n="nav.hardware"></a>
-            <a href="#unterstuetzen" data-i18n="nav.support"></a>
-            <a href="#datenschutz" data-i18n="nav.privacy"></a>
-        </nav>
     </div>
 </header>
 
-<section class="hero">
-    <div class="wrap">
-        <span class="kick" data-i18n="hero.kick"></span>
-        <h1>
-            <span data-i18n="hero.h1a"></span>
-            <span class="t-int" data-i18n="hero.h1b"></span>
-            <span data-i18n="hero.h1c"></span>
-        </h1>
-        <p class="lede" data-i18n="hero.lede"></p>
-        <div class="hero-actions">
-            <a class="btn btn-primary" href="#vergleich" data-i18n="hero.btnCompare"></a>
-            <a class="btn btn-ghost" href="#features" data-i18n="hero.btnMore"></a>
-        </div>
-    </div>
-</section>
-
-<section id="features" class="alt">
-    <div class="wrap">
-        <div class="section-head">
-            <div class="eyebrow" data-i18n="feat.eyebrow"></div>
-            <h2 data-i18n="feat.title"></h2>
-            <p data-i18n="feat.sub"></p>
-        </div>
-        <div class="grid" id="featGrid"></div>
-    </div>
-</section>
-
-<section id="github" class="github-section">
-    <div class="wrap">
-        <div class="github-panel">
-            <div class="github-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12 .7a11.3 11.3 0 0 0-3.57 22c.57.1.78-.25.78-.55v-2.18c-3.2.7-3.87-1.36-3.87-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.23-1.28-5.23-5.59 0-1.23.44-2.24 1.19-3.03-.12-.29-.52-1.46.11-2.99 0 0 .97-.31 3.11 1.16a10.8 10.8 0 0 1 5.66 0c2.14-1.47 3.11-1.16 3.11-1.16.63 1.53.23 2.7.11 2.99.74.79 1.19 1.8 1.19 3.03 0 4.32-2.69 5.29-5.25 5.58.41.36.78 1.06.78 2.14v3.18c0 .3.21.66.79.55A11.3 11.3 0 0 0 12 .7Z"/>
-                </svg>
+<main id="top">
+    <section class="hero">
+        <div class="wrap">
+            <div class="kick" data-t="kicker"></div>
+            <h1><span data-t="heroA"></span> <span class="accent" data-t="heroB"></span></h1>
+            <p class="lede" data-t="lede"></p>
+            <div class="hero-actions">
+                <a class="btn btn-primary" href="#nachweise" data-t="ctaEvidence"></a>
+                <a class="btn btn-secondary" href="#unterstuetzen" data-t="ctaSupport"></a>
             </div>
-            <div class="github-copy">
-                <div class="eyebrow" data-github-i18n="eyebrow"></div>
-                <h2 data-github-i18n="title"></h2>
-                <p data-github-i18n="body"></p>
-                <div class="github-repo">github.com/MarioKowalski78/TalpaX</div>
-            </div>
-            <a class="btn btn-github"
-                href="https://github.com/MarioKowalski78/TalpaX"
-                target="_blank"
-                rel="noopener noreferrer"
-                data-github-i18n="button"></a>
-        </div>
-    </div>
-</section>
-
-<section id="vergleich" class="compare">
-    <div class="wrap">
-        <div class="section-head">
-            <div class="eyebrow" data-i18n="cmp.eyebrow"></div>
-            <h2 data-i18n="cmp.title"></h2>
-            <p data-i18n="cmp.sub"></p>
-        </div>
-        <div class="note">
-            <strong data-i18n="cmp.lead">Hinweis zur Einordnung:</strong>
-            <span data-i18n="cmp.body"></span>
-        </div>
-        <div class="table-scroll">
-            <table>
-                <colgroup><col><col><col><col></colgroup>
-                <thead>
-                    <tr>
-                        <th data-i18n="cmp.th1"></th>
-                        <th id="cmpHead"></th>
-                        <th data-i18n="cmp.th2"></th>
-                        <th data-i18n="cmp.th3"></th>
-                    </tr>
-                </thead>
-                <tbody id="cmpBody"></tbody>
-            </table>
-        </div>
-        <p class="foot" data-i18n="cmp.foot"></p>
-    </div>
-</section>
-
-<section id="hardware" class="compare">
-    <div class="wrap">
-        <div class="section-head">
-            <div class="eyebrow" data-i18n="hw.eyebrow"></div>
-            <h2 data-i18n="hw.title"></h2>
-            <p data-i18n="hw.sub"></p>
-        </div>
-        <div class="note">
-            <strong data-i18n="hw.lead">Hochrechnung, kein Benchmark:</strong>
-            <span data-i18n="hw.body"></span>
-        </div>
-        <div class="table-scroll">
-            <table>
-                <colgroup><col><col><col><col></colgroup>
-                <thead>
-                    <tr>
-                        <th data-i18n="hw.th1"></th>
-                        <th data-i18n="hw.th2"></th>
-                        <th>iDX6011 Pro</th>
-                        <th data-i18n="hw.th4"></th>
-                    </tr>
-                </thead>
-                <tbody id="hwBody"></tbody>
-            </table>
-        </div>
-        <div class="hw-block">
-            <div class="section-head sub">
-                <h3 data-i18n="hw.mt"></h3>
-                <p data-i18n="hw.ms"></p>
-            </div>
-            <div class="requirements" id="reqGrid"></div>
-        </div>
-        <div class="hw-block">
-            <div class="section-head sub">
-                <h3 data-i18n="hw.eo"></h3>
-                <p data-i18n="hw.eos"></p>
-            </div>
-            <div class="grid hw-grid" id="hwCards"></div>
-        </div>
-    </div>
-</section>
-
-<section id="unterstuetzen" class="alt">
-    <div class="wrap">
-        <div class="section-head">
-            <div class="eyebrow" data-i18n="sup.eyebrow"></div>
-            <h2 data-i18n="sup.title"></h2>
-            <p data-i18n="sup.sub"></p>
-        </div>
-        <div class="gfm">
-            <div class="gfm-copy">
-                <p data-i18n="sup.p1"></p>
-                <p data-i18n="sup.p2"></p>
-                <p data-i18n="sup.p3"></p>
-                <p data-i18n="sup.p4"></p>
-            </div>
-            <div class="gfm-action">
-                <span class="gfm-tag" data-i18n="sup.tag"></span>
-                <h3 data-i18n="sup.actionH"></h3>
-                <p class="gfm-meta">
-                    <span data-i18n="sup.meta1"></span> · <span data-i18n="sup.meta2"></span>
-                </p>
-                <a class="btn btn-gfm"
-                    href="https://www.gofundme.com/f/privat-ki-projekt-nearly-noyron-for-my-startup-possibility"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    data-i18n="sup.btn"></a>
-                <p class="gfm-note" data-i18n="sup.note"></p>
+            <div class="signal-bar" aria-label="TalpaX Kurzprofil">
+                <div class="signal"><strong data-t="signal1Title"></strong><span data-t="signal1Body"></span></div>
+                <div class="signal"><strong data-t="signal2Title"></strong><span data-t="signal2Body"></span></div>
+                <div class="signal"><strong data-t="signal3Title"></strong><span data-t="signal3Body"></span></div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<section id="datenschutz" class="alt">
-    <div class="wrap">
-        <div class="section-head">
-            <div class="eyebrow" data-i18n="pr.eyebrow"></div>
-            <h2 data-i18n="pr.title"></h2>
-            <p data-i18n="pr.sub"></p>
+    <section id="beispiele">
+        <div class="wrap">
+            <div class="section-head">
+                <div class="eyebrow" data-t="examplesEyebrow"></div>
+                <h2 data-t="examplesTitle"></h2>
+                <p data-t="examplesIntro"></p>
+            </div>
+            <div class="example-grid">
+                <div class="example" data-t="example1"></div>
+                <div class="example" data-t="example2"></div>
+                <div class="example" data-t="example3"></div>
+                <div class="example" data-t="example4"></div>
+                <div class="example" data-t="example5"></div>
+            </div>
+            <p class="example-note" data-t="examplesNote"></p>
         </div>
-        <div class="privacy-grid" id="prGrid"></div>
-    </div>
-</section>
+    </section>
+
+    <section id="nachweise" class="alt">
+        <div class="wrap">
+            <div class="section-head">
+                <div class="eyebrow" data-t="proofEyebrow"></div>
+                <h2 data-t="proofTitle"></h2>
+                <p data-t="proofIntro"></p>
+            </div>
+            <div class="proof-grid">
+                <article class="proof"><div class="num">595</div><h3 data-t="proof1Title"></h3><p data-t="proof1Body"></p></article>
+                <article class="proof"><div class="num">2/2</div><h3 data-t="proof2Title"></h3><p data-t="proof2Body"></p></article>
+                <article class="proof"><div class="num" data-t="proof3Metric"></div><h3 data-t="proof3Title"></h3><p data-t="proof3Body"></p></article>
+                <article class="proof"><div class="num">12</div><h3 data-t="proof4Title"></h3><p data-t="proof4Body"></p></article>
+            </div>
+            <p class="status-note" data-t="proofDisclaimer"></p>
+        </div>
+    </section>
+
+    <section id="warum">
+        <div class="wrap">
+            <div class="section-head">
+                <div class="eyebrow" data-t="whyEyebrow"></div>
+                <h2 data-t="whyTitle"></h2>
+                <p data-t="whyIntro"></p>
+            </div>
+            <div class="why-grid">
+                <article class="why-card"><div class="icon">01</div><h3 data-t="why1Title"></h3><p data-t="why1Body"></p></article>
+                <article class="why-card"><div class="icon">02</div><h3 data-t="why2Title"></h3><p data-t="why2Body"></p></article>
+                <article class="why-card"><div class="icon">03</div><h3 data-t="why3Title"></h3><p data-t="why3Body"></p></article>
+            </div>
+        </div>
+    </section>
+
+    <section id="unterstuetzen" class="alt">
+        <div class="wrap">
+            <div class="support">
+                <div>
+                    <div class="eyebrow" data-t="supportEyebrow"></div>
+                    <h2 data-t="supportTitle"></h2>
+                    <p data-t="supportBody"></p>
+                </div>
+                <a class="btn btn-support" href="https://www.gofundme.com/f/privat-ki-projekt-nearly-noyron-for-my-startup-possibility" target="_blank" rel="noopener noreferrer" data-t="supportButton"></a>
+            </div>
+        </div>
+    </section>
+</main>
 
 <footer>
-    <div class="wrap">
-        <div>
-            <div class="footer-logo">
-                <img src="talpax-wordmark.svg" alt="TalpaX">
-            </div>
-            <p class="fine" data-i18n="footer.fine"></p>
-        </div>
-        <div>
-            <nav>
-                <a href="#features" data-i18n="nav.functions"></a>
-                <a href="#github">GitHub</a>
-                <a href="#vergleich" data-i18n="nav.compare"></a>
-                <a href="#hardware" data-i18n="nav.hardware"></a>
-                <a href="#unterstuetzen" data-i18n="nav.support"></a>
-                <a href="#datenschutz" data-i18n="nav.privacy"></a>
-            </nav>
-        </div>
+    <div class="wrap footer-inner">
+        <div class="footer-logo"><img src="talpax-wordmark.svg" alt="TalpaX"></div>
+        <p data-t="footer"></p>
     </div>
 </footer>
 
-<script>
-    (function () {
-        var header = document.querySelector("header");
-        var root = document.documentElement;
-
-        function syncHeaderOffset() {
-            root.style.setProperty("--header-offset", header.offsetHeight + "px");
-        }
-
-        syncHeaderOffset();
-        if ("ResizeObserver" in window) {
-            new ResizeObserver(syncHeaderOffset).observe(header);
-        } else {
-            window.addEventListener("resize", syncHeaderOffset);
-        }
-    }());
-</script>
-<script src="i18n.js?v=20260901-3"></script>
+<script src="i18n.js"></script>
 </body>
 </html>
